@@ -1,4 +1,5 @@
 # What is this
+
 - Setup and install software to a fresh machine using PowerShell, Chocolatery and Boxstarter to be useful for development
 
 # How to run
@@ -8,79 +9,25 @@ One click Web URL - Click [here to install using Boxstarter](http://boxstarter.o
 Requires admin access
 
 Make sure its opened from IE. Everything will be taken care.
+
 ## Prerequisites
+
 - Chocolatey
 - Box starter
-
 
 # What are the changes and software installed
 
 ## Environment changes
 
 - On Power, monitor timeout to 20 mins
-- On Power, never sleep 
+- On Power, never sleep
 - Show hidden files and folders
 - Show protected OS files
 - Show known file extensions
 
 ## Software
 
-### General
-- Browsers
-  - Edge
-  - Chrome
-  - Firefox
-- Communications
-  - Skype,
-  - MS Teams
-- Editing
-  - Notepad++
-  - Grammarly
-- Media players 
-  - vlc
-- Network and debugging
-  - Fiddler
-  - logparser
-  - Postman
-  - sysitnernals
-  - wget
-  - Wireshark
-- Office
-  - PowerBI
-- Scripting
-  - PowerShell Core
-- Utils
-  - FileZilla
-  - Greenshot
-
-### Publishing
-
-- Streaming and screen recording
-  - OBS Studio
-
-### Software development
-
-- Editors & IDE
-  - VS Code
-- Source Code Version Control
-  - Git
-- .Net
-  - DotNetCore-SDK
-  - DotPeek
-- NodeJS
-  - NodeJS-LTS
-- Python
-  - Python 3
-- Hosting
-  - Azure CLI
-- Diagramming
-  - Graphviz
-
-# What is pending
-
-- Visual Studio 2019
-- WSL 2
-- Docker desktop
+See [setup.ps1](./setup.ps1) for a complete and updated list.
 
 # References
 
