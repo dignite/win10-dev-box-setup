@@ -73,6 +73,18 @@ foreach ($Obj in $ComObjItem) {
 
 ######## <- ENVIRONMENT CONFIGURATION ########
 
+
+######## -> WINDOWS UPDATE ########
+
+Install-Module PSWindowsUpdate
+Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -AddServiceFlag 7
+Get-WindowsUpdate
+Install-WindowsUpdate
+
+Checkpoint-Computer -Description "Clean Install with Updates"
+
+######## <- WINDOWS UPDATE ########
+
 ######## -> COMMON TOOLS CONFIGURATION ########
 
 Write-Host "Installing common tools using choco"
