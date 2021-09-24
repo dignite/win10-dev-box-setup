@@ -47,38 +47,23 @@ $Apps = @(
     "firefox",
     
     #Communications
-    "skype",
-    "microsoft-teams.install",
-    #"teamviewer",
     
     #Editing
-    "notepadplusplus.install",
-    "grammarly",
     
     # Media players and production
-    "vlc",
+
     #"kdenlive", # Supports standalone 
     "obs-studio",
     
     # Network & Debugging
-    "fiddler",
-    "logparser",
     "postman",
-    "sysinternals",
-    "wget",
-    "wireshark",
 
     #office
-    "powerbi",
 
     #Scriptings
-    "powershell-core",
     
     #Utils
-    "filezilla",
     "greenshot"
-
-    #"lightshot.install",
 )
 
 foreach ($app in $Apps) {
@@ -96,20 +81,10 @@ $devTools = @(
     "git",
     #.Net
     "dotnetcore-sdk",
-    "dotpeek",
-    "debugdiagnostic",
-    #Uncomment below line for service fabric
-    #"service-fabric-explorer",
     #NodeJS
     "nodejs-lts",
-    #Python
-    "python3",
     #Database
-    "ssms",
-    # hosting on cloud
-    "azure-cli",
-    # Diagramming
-    "graphviz"
+    "ssms"
 )
 foreach ($devTool in $devTools) {
     cinst $devTool -y
