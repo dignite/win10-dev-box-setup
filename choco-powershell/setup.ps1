@@ -38,8 +38,16 @@ else {
     . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
+if (Check-Command -cmdname 'scoop') {
+    Write-Host "scoop is already installed, skip installation."
+}
+else {
+    Write-Host "Installing scoop..."
+    Write-Host "------------------------------------" 
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+    Write-Host "Installed scoop" -ForegroundColor Green
+}
 
-Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
 refreshenv
 
 #### <- PREREQUISITES ####
