@@ -27,6 +27,8 @@ else {
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
 
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+
 #### <- PREREQUISITES ####
 
 ######## -> ENVIRONMENT CONFIGURATION ########
