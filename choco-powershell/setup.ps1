@@ -75,11 +75,15 @@ foreach ($Obj in $ComObjItem) {
         Write-Host "$("Verb: " + $Verb.name)" -ForegroundColor white
         if (($Verb.name -match 'Un.*pin from Start')) {
             Write-Host "$("Ok " + $Obj.name + " contains " + $Verb.name)" -ForegroundColor Red
-            $Verb.DoIt()
+            try {
+                $Verb.DoIt()
+            } catch() {}
         }
         if (($Verb.name -match 'Un.*pin from tas&kbar') -And ($Obj.name -match $AppNames)) {
             Write-Host "$("Ok " + $Obj.name + " contains " + $Verb.name)" -ForegroundColor Red
-            $Verb.DoIt()
+            try {
+                $Verb.DoIt()
+            } catch() {}
         }
     }
 }
