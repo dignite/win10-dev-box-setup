@@ -104,7 +104,8 @@ Write-Host "Installed dev tools" -Foreground green
 ######## <- DEV TOOLS CONFIGURATION ########
 
 #### -> PERSONALIZE ####
-git config --global user.email "joymon@gmail.com"
-git config --global user.name "Joy George Kunjikkuru"
+Write-Host "Done! Please configure personal information."
+Write-Host "    git config --global user.email ""<email>""" -Foreground green
+Write-Host "    git config --global user.name ""<name>""" -Foreground green
 
 #### <- PERSONALIZE ####
