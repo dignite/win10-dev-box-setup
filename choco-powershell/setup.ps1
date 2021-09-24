@@ -112,7 +112,10 @@ Checkpoint-Computer -Description "Clean Install with Updates"
 
 ######## -> WINDOWS SUBSYSTEM FOR LINUX ########
 
-wsl.exe --set-default-version 2
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+refreshenv
+wsl --set-default-version 2
 wsl --update
 wsl --install --distribution Ubuntu
 
