@@ -42,10 +42,34 @@ Checkpoint-Computer -Description "Clean Install"
 Write-Host "Setting up power options"
 Powercfg /Change monitor-timeout-ac 20
 Powercfg /Change standby-timeout-ac 0
+powercfg -setacvalueindex scheme_current sub_buttons pbuttonaction 0
 Write-Host "Completed power options" -Foreground green
 
 # Show hidden files, Show protected OS files, Show file extensions
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowTaskViewButton -Value 0 -Type DWord -Force
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name ShowCortanaButton -Value 0 -Type DWord -Force
+Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchBoxTaskbarMode -Value 0 -Type DWord -Force
+
+# Remove all $AppNames String array from taskbar Pin location
+$ComObj = (New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}')
+$AppNames = "Microsoft Edge|stor|mai|support"
+#use the match to limit the apps removed from start tiles
+$ComObjItem = $ComObj.Items() | ?{$_.Name -match $AppNames}
+foreach ($Obj in $ComObjItem) {
+    Write-Host "$("Checking " + $Obj.name)" -ForegroundColor Cyan
+    foreach ($Verb in $Obj.Verbs()) {
+        Write-Host "$("Verb: " + $Verb.name)" -ForegroundColor white
+        if (($Verb.name -match 'Un.*pin from Start')) {
+            Write-Host "$("Ok " + $Obj.name + " contains " + $Verb.name)" -ForegroundColor Red
+            $Verb.DoIt()
+        }
+        if (($Verb.name -match 'Un.*pin from tas&kbar') -And ($Obj.name -match $AppNames)) {
+            Write-Host "$("Ok " + $Obj.name + " contains " + $Verb.name)" -ForegroundColor Red
+            $Verb.DoIt()
+        }
+    }
+}
 
 ######## <- ENVIRONMENT CONFIGURATION ########
 
