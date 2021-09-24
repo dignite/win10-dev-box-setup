@@ -4,6 +4,18 @@ function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
+function Add-ToPowerShellProfile($Find, $Content) {
+    if (!( Test-Path $Profile )) { 
+        New-Item $Profile -Type File -Force
+    } else  {
+        $CurrentProfileContent = Get-Content $Profile
+    }
+
+    if (!($CurrentProfileContent -Like $Find)) {
+        $Content | Add-Content $Profile -Encoding UTF8
+    }
+}
+
 #### <- HELPER FUNCTIONS ####
 
 #### -> PREREQUISITES ####
@@ -138,6 +150,15 @@ $vsCodeExtensions = @(
 Write-Host "Installing VS Code extensions"
 $vsCodeExtensions | ForEach-Object { code --install-extension $_}
 Write-Host "Installed VS Code Extensions" -Foreground green
+
+Install-Module -Name z -RequiredVersion 1.1.10 -AllowClobber
+Install-Module psreadline -Force
+
+Add-ToPowerShellProfile -Find "*Set-PSReadLineOption*" -Content @("
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+")
 
 ######## <- DEV TOOLS CONFIGURATION ########
 
