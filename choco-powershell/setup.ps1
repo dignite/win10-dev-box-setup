@@ -1,10 +1,13 @@
 #### -> HELPER FUNCTIONS ####
+
 function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
+
 #### <- HELPER FUNCTIONS ####
 
 #### -> PREREQUISITES ####
+
 if (Check-Command -cmdname 'choco') {
     Write-Host "Choco is already installed, skip installation."
 }
@@ -27,6 +30,7 @@ else {
 #### <- PREREQUISITES ####
 
 ######## -> ENVIRONMENT CONFIGURATION ########
+
 Write-Host "Setting up power options"
 Powercfg /Change monitor-timeout-ac 20
 Powercfg /Change standby-timeout-ac 0
@@ -38,6 +42,7 @@ Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtec
 ######## <- ENVIRONMENT CONFIGURATION ########
 
 ######## -> COMMON TOOLS CONFIGURATION ########
+
 Write-Host "Installing common tools using choco"
 
 $Apps = @(
@@ -70,9 +75,11 @@ foreach ($app in $Apps) {
     cinst $app -y
 } 
 Write-Host "Installed common tools" -Foreground green
+
 ######## <- COMMON TOOLS CONFIGURATION ########
 
 ######## -> DEV TOOLS CONFIGURATION ########
+
 Write-Host "Installing dev tools using choco"
 $devTools = @(
     #Editors
@@ -90,7 +97,6 @@ foreach ($devTool in $devTools) {
     cinst $devTool -y
 }
 
-###### -> Install VS Code Extensions #######
 $vsCodeExtensions = @(
     "jebbs.plantuml",
     "evilz.vscode-reveal",
@@ -101,9 +107,11 @@ Write-Host "Installing VS Code extensions"
 $vsCodeExtensions | ForEach-Object { code --install-extension $_}
 Write-Host "Installed VS Code Extensions" -Foreground green
 Write-Host "Installed dev tools" -Foreground green
+
 ######## <- DEV TOOLS CONFIGURATION ########
 
 #### -> PERSONALIZE ####
+
 Write-Host "Done! Please configure personal information."
 Write-Host "    git config --global user.email ""<email>""" -Foreground green
 Write-Host "    git config --global user.name ""<name>""" -Foreground green
