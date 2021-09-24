@@ -141,14 +141,19 @@ Write-Host "Installed programs" -Foreground green
 
 ######## -> DEV TOOLS CONFIGURATION ########
 
-$vsCodeExtensions = @(
-    "jebbs.plantuml",
-    "evilz.vscode-reveal",
-    "streetsidesoftware.code-spell-checker",
-    "ms-azuretools.vscode-docker"
-)
 Write-Host "Installing VS Code extensions"
-$vsCodeExtensions | ForEach-Object { code --install-extension $_}
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension esbenp.prettier-vscode
+code --install-extension formulahendry.auto-rename-tag
+code --install-extension hbenl.vscode-test-explorer
+code --install-extension hbenl.vscode-test-explorer-liveshare
+code --install-extension kavod-io.vscode-jest-test-adapter
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension msjsdiag.debugger-for-chrome
+code --install-extension PKief.material-icon-theme
+code --install-extension runningcoder.react-snippets
+code --install-extension schmas.jump-to-tests
+code --install-extension sandcastle.vscode-open
 Write-Host "Installed VS Code Extensions" -Foreground green
 
 Install-Module -Name z -RequiredVersion 1.1.10 -AllowClobber
