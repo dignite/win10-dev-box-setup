@@ -86,6 +86,14 @@ Checkpoint-Computer -Description "Clean Install with Updates"
 
 ######## <- WINDOWS UPDATE ########
 
+######## -> WINDOWS SUBSYSTEM FOR LINUX ########
+
+wsl.exe --set-default-version 2
+wsl --update
+wsl --install --distribution Ubuntu
+
+######## <- WINDOWS SUBSYSTEM FOR LINUX ########
+
 ######## -> COMMON TOOLS CONFIGURATION ########
 
 Write-Host "Installing common tools using choco"
