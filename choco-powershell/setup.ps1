@@ -101,7 +101,7 @@ foreach ($Obj in $ComObjItem) {
 
 ######## -> WINDOWS UPDATE ########
 
-Install-Module PSWindowsUpdate
+Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
 Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -AddServiceFlag 7
 Get-WindowsUpdate
 Install-WindowsUpdate
