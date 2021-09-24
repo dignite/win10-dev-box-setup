@@ -94,61 +94,40 @@ wsl --install --distribution Ubuntu
 
 ######## <- WINDOWS SUBSYSTEM FOR LINUX ########
 
-######## -> COMMON TOOLS CONFIGURATION ########
+######## -> PROGRAMS ########
 
-Write-Host "Installing common tools using choco"
+Write-Host "Installing programs using choco or scoop"
+choco install poshgit -y
+choco install divvy -y
+choco install microsoft-edge -y
+choco install googlechrome -y
+choco install firefox -y
+choco install obs-studio -y
+choco install vscode -y
+choco install clipx -y
+choco install nvm -y
+choco install lastpass -y
+choco install slack -y
+choco install greenshot -y
+choco install azure-data-studio -y
+choco install microsoft-windows-terminal -y
+choco install firacode -y
+choco install dotnetcore -y
+choco install jetbrains-rider -y
+choco install lastpass -y
+choco install ssms -y
+choco install postman -y
+choco install docker-desktop -y
+choco install dotnetcore-sdk -y
+scoop install yarn
+scoop install sudo
+scoop install pwsh
+Write-Host "Installed programs" -Foreground green
 
-$Apps = @(
-    #Browsers
-    "microsoft-edge",
-    "googlechrome",
-    "firefox",
-    
-    #Communications
-    
-    #Editing
-    
-    # Media players and production
+######## <- PROGRAMS ########
 
-    #"kdenlive", # Supports standalone 
-    "obs-studio",
-    
-    # Network & Debugging
-    "postman",
-
-    #office
-
-    #Scriptings
-    
-    #Utils
-    "greenshot"
-)
-
-foreach ($app in $Apps) {
-    cinst $app -y
-} 
-Write-Host "Installed common tools" -Foreground green
-
-######## <- COMMON TOOLS CONFIGURATION ########
 
 ######## -> DEV TOOLS CONFIGURATION ########
-
-Write-Host "Installing dev tools using choco"
-$devTools = @(
-    #Editors
-    "vscode",
-    #Version control    
-    "git",
-    #.Net
-    "dotnetcore-sdk",
-    #NodeJS
-    "nodejs-lts",
-    #Database
-    "ssms"
-)
-foreach ($devTool in $devTools) {
-    cinst $devTool -y
-}
 
 $vsCodeExtensions = @(
     "jebbs.plantuml",
@@ -159,7 +138,6 @@ $vsCodeExtensions = @(
 Write-Host "Installing VS Code extensions"
 $vsCodeExtensions | ForEach-Object { code --install-extension $_}
 Write-Host "Installed VS Code Extensions" -Foreground green
-Write-Host "Installed dev tools" -Foreground green
 
 ######## <- DEV TOOLS CONFIGURATION ########
 
