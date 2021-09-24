@@ -33,6 +33,12 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.
 
 ######## -> ENVIRONMENT CONFIGURATION ########
 
+Enable-ComputerRestore -Drive "C:\"
+vssadmin list shadowstorage
+vssadmin resize shadowstorage /on=C: /for=C: /maxsize=10%
+Set-ItemProperty "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name SystemRestorePointCreationFrequency -Value 5
+Checkpoint-Computer -Description "Clean Install"
+
 Write-Host "Setting up power options"
 Powercfg /Change monitor-timeout-ac 20
 Powercfg /Change standby-timeout-ac 0
