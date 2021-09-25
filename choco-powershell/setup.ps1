@@ -138,7 +138,6 @@ choco install googlechrome -y
 choco install firefox -y
 choco install obs-studio -y
 choco install vscode -y
-choco install clipx -y
 choco install nvm -y
 choco install lastpass -y
 choco install slack -y
@@ -224,6 +223,7 @@ Write-Host ""
 Write-Host "Manual installs" -Foreground green
 Write-Host "    MicSwitch https://github.com/iXab3r/MicSwitch/releases" -Foreground green
 Write-Host "    LogiCapture https://www.logitech.com/en-us/product/capture" -Foreground green
+Write-Host "    choco install clipx -y" -Foreground green
 Write-Host ""
 Write-Host "Configure ClipX" -Foreground green
 Write-Host "    1. Right click tray icon and open settings" -Foreground green
