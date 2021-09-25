@@ -100,21 +100,6 @@ foreach ($Obj in $ComObjItem) {
 
 ######## <- ENVIRONMENT CONFIGURATION ########
 
-
-######## -> WINDOWS UPDATE ########
-
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Module -Name PSWindowsUpdate -Repository PSGallery
-Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -AddServiceFlag 7
-Get-WindowsUpdate
-Install-WindowsUpdate
-
-if  (!((Get-ComputerRestorePoint).Description -Like "Clean Install with Updates")) {
-    Checkpoint-Computer -Description "Clean Install with Updates"
-}
-
-######## <- WINDOWS UPDATE ########
-
 ######## -> WINDOWS SUBSYSTEM FOR LINUX ########
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -208,6 +193,16 @@ git config --global alias.mr "push -u -o merge_request.create -o merge_request.r
 mkdir C:\dev
 
 ######## <- DEV TOOLS CONFIGURATION ########
+
+######## -> WINDOWS UPDATE ########
+
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Name PSWindowsUpdate -Repository PSGallery
+Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -AddServiceFlag 7
+Get-WindowsUpdate
+Install-WindowsUpdate
+
+######## <- WINDOWS UPDATE ########
 
 if  (!((Get-ComputerRestorePoint).Description -Like "Boxstarter done")) {
     Checkpoint-Computer -Description "Boxstarter done"
