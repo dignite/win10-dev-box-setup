@@ -2,11 +2,17 @@
 
 $BoostrapPackageFlag = "-bootstrapPackage"
 $ScriptUri = $Boxstarter['ScriptToCall']
+Write-Host "BoxstarterScriptToCall $(Boxstarter['ScriptToCall'])"
 $BoostrapPackageFlagPosition = $ScriptUri.IndexOf($BoostrapPackageFlag)
+Write-Host "BoostrapPackageFlagPosition $BoostrapPackageFlagPosition"
 $BoostrapPackagePath = $BaseUri.Substring($BoostrapPackageFlagPosition + $BoostrapPackageFlag.Length)
+Write-Host "BoostrapPackagePath $BoostrapPackagePath"
 $BoostrapPackagePath = $BoostrapPackagePath.TrimStart("'", " ")
+Write-Host "BoostrapPackagePath $BoostrapPackagePath"
 $BoostrapPackagePath = $BoostrapPackagePath.TrimEnd("'", " ")
+Write-Host "BoostrapPackagePath $BoostrapPackagePath"
 $BoostrapPackageFolder = $BoostrapPackagePath.Substring(0, $BoostrapPackagePath.LastIndexOf("/"))
+Write-Host "BoostrapPackageFolder $BoostrapPackageFolder"
 
 function Download-FromRelativePath {
     Param ([string]$RelativePath, [string]$Destination)
