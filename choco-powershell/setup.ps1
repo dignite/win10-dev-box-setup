@@ -1,5 +1,18 @@
 #### -> HELPER FUNCTIONS ####
 
+$BoostrapPackageFlag = "-bootstrapPackage"
+$ScriptUri = $Boxstarter['ScriptToCall']
+$BoostrapPackageFlagPosition = $ScriptUri.IndexOf($BoostrapPackageFlag)
+$BoostrapPackagePath = $BaseUri.Substring($BoostrapPackageFlagPosition + $BoostrapPackageFlag.Length)
+$BoostrapPackagePath = $BoostrapPackagePath.TrimStart("'", " ")
+$BoostrapPackagePath = $BoostrapPackagePath.TrimEnd("'", " ")
+$BoostrapPackageFolder = $BoostrapPackagePath.Substring(0, $BaseUri.LastIndexOf("/"))
+
+function Download-FromRelativePath {
+    Param ([string]$RelativePath, [string]$Destination)
+	(new-object net.webclient).DownloadFile("$BoostrapPackageFolder/$RelativePath", $Destination)
+}
+
 function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
@@ -97,6 +110,14 @@ foreach ($Obj in $ComObjItem) {
         }
     }
 }
+
+$WallpaperImagePath = "$([Environment]::GetFolderPath("MyDocuments"))/wallpaper.jpg"
+Download-FromRelativePath -RelativePath "cj-dayrit-eMBdLhYY468-unsplash.jpg" -Destination $WallpaperImagePath
+Set-ItemProperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $WallpaperImagePath
+Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0"
+$SpanWallpaper = "22";
+Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallpaperStyle -value $SpanWallpaper -Force
+RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
 
 ######## <- ENVIRONMENT CONFIGURATION ########
 
