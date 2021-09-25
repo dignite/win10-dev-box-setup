@@ -6,7 +6,7 @@ $BoostrapPackageFlagPosition = $ScriptUri.IndexOf($BoostrapPackageFlag)
 $BoostrapPackagePath = $BaseUri.Substring($BoostrapPackageFlagPosition + $BoostrapPackageFlag.Length)
 $BoostrapPackagePath = $BoostrapPackagePath.TrimStart("'", " ")
 $BoostrapPackagePath = $BoostrapPackagePath.TrimEnd("'", " ")
-$BoostrapPackageFolder = $BoostrapPackagePath.Substring(0, $BaseUri.LastIndexOf("/"))
+$BoostrapPackageFolder = $BoostrapPackagePath.Substring(0, $BoostrapPackagePath.LastIndexOf("/"))
 
 function Download-FromRelativePath {
     Param ([string]$RelativePath, [string]$Destination)
