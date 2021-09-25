@@ -60,7 +60,9 @@ Enable-ComputerRestore -Drive "C:\"
 vssadmin list shadowstorage
 vssadmin resize shadowstorage /on=C: /for=C: /maxsize=10%
 Set-ItemProperty "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Name SystemRestorePointCreationFrequency -Value 5
-Checkpoint-Computer -Description "Clean Install"
+if  (!((Get-ComputerRestorePoint).Description -Like "Clean Install")) {
+    Checkpoint-Computer -Description "Clean Install"
+}
 
 Write-Host "Setting up power options"
 Powercfg /Change monitor-timeout-ac 20
@@ -109,7 +111,9 @@ Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -AddService
 Get-WindowsUpdate
 Install-WindowsUpdate
 
-Checkpoint-Computer -Description "Clean Install with Updates"
+if  (!((Get-ComputerRestorePoint).Description -Like "Clean Install with Updates")) {
+    Checkpoint-Computer -Description "Clean Install with Updates"
+}
 
 ######## <- WINDOWS UPDATE ########
 
@@ -208,7 +212,9 @@ mkdir C:\dev
 
 ######## <- DEV TOOLS CONFIGURATION ########
 
-Checkpoint-Computer -Description "Boxstarter done"
+if  (!((Get-ComputerRestorePoint).Description -Like "Boxstarter done")) {
+    Checkpoint-Computer -Description "Boxstarter done"
+}
 
 #### -> MANUAL INSTRUCTIONS ####
 
