@@ -118,7 +118,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 refreshenv
 wsl --set-default-version 2
 wsl --update
-wsl --install --distribution Ubuntu
+if (!((wsl --list --all) -Like "Ubuntu")) {
+    wsl --install --distribution Ubuntu
+}
 
 ######## <- WINDOWS SUBSYSTEM FOR LINUX ########
 
