@@ -240,27 +240,29 @@ if  (!((Get-ComputerRestorePoint).Description -Like "Boxstarter done")) {
 
 #### -> MANUAL INSTRUCTIONS ####
 
-Write-Host "Done! Please configure personal information." -Foreground green
-Write-Host "    git config --global user.email ""<email>""" -Foreground green
-Write-Host "    git config --global user.name ""<name>""" -Foreground green
-Write-Host ""
-Write-Host "Manual installs" -Foreground green
-Write-Host "    MicSwitch https://github.com/iXab3r/MicSwitch/releases" -Foreground green
-Write-Host "    LogiCapture https://www.logitech.com/en-us/product/capture" -Foreground green
-Write-Host "    choco install clipx -y" -Foreground green
-Write-Host ""
-Write-Host "Configure ClipX" -Foreground green
-Write-Host "    1. Right click tray icon and open settings" -Foreground green
-Write-Host "    2. Check ""Run ClipX on Startup""" -Foreground green
-Write-Host "    3. Remember the last 256 entries" -Foreground green
-Write-Host "    4. Delete hotkeys ""Navigate"" and ""Google Search""" -Foreground green
-Write-Host ""
-Write-Host "Configure VSCode" -Foreground green
-Write-Host "   1. Turn on Settings Sync (Ctrl+P ""Turn On"")" -Foreground green
-Write-Host "   2. Log in with Github" -Foreground green
-Write-Host "   3. ""Replace Local""" -Foreground green
-Write-Host ""
-Write-Host "Add saved Powershell_profile.ps1" -Foreground green
-Write-Host "Add saved Windows Terminal settings.json" -Foreground green
+$ManualInstructionsFilePath = "$([Environment]::GetFolderPath("Desktop"))/ManualSteps.txt";
+"Please configure personal information.
+    git config --global user.email ""<email>""
+    git config --global user.name ""<name>""
+
+Manual installs
+    MicSwitch https://github.com/iXab3r/MicSwitch/releases
+    LogiCapture https://www.logitech.com/en-us/product/capture
+    choco install clipx -y
+
+Configure ClipX
+    1. Right click tray icon and open settings
+    2. Check ""Run ClipX on Startup""
+    3. Remember the last 256 entries
+    4. Delete hotkeys ""Navigate"" and ""Google Search""
+
+Configure VSCode
+   1. Turn on Settings Sync (Ctrl+P ""Turn On"")
+   2. Log in with Github
+   3. ""Replace Local""
+   
+Add saved Powershell_profile.ps1
+Add saved Windows Terminal settings.json" | Add-Content $ManualInstructionsFilePath -Encoding UTF8
+notepad.exe $ManualInstructionsFilePath
 
 #### <- MANUAL INSTRUCTIONS ####
