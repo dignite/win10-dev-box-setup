@@ -194,6 +194,15 @@ mkdir C:\dev
 
 ######## <- DEV TOOLS CONFIGURATION ########
 
+######## -> CLEAN UP ########
+
+Write-Host "Cleaning desktop"
+Remove-Item C:\Users\*\Desktop\*lnk
+Remove-Item C:\Users\*\Desktop\desktop.ini
+Write-Host "Desktop cleaned"
+
+######## <- CLEAN UP ########
+
 ######## -> WINDOWS UPDATE ########
 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
