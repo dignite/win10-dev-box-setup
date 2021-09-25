@@ -120,7 +120,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 refreshenv
 wsl --set-default-version 2
 wsl --update
-if (!((wsl --list --all) -Like "Ubuntu")) {
+if (!((wsl --list --all) -Like "*Ubuntu*")) {
     wsl --install --distribution Ubuntu
 }
 
