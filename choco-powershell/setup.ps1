@@ -149,7 +149,6 @@ choco install dotnetcore -y
 choco install jetbrains-rider -y
 choco install lastpass -y
 choco install ssms -y
-choco install postman -y
 choco install docker-desktop -y
 choco install dotnetcore-sdk -y
 scoop install yarn
