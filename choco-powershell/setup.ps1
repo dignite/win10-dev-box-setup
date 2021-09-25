@@ -1,24 +1,5 @@
 #### -> HELPER FUNCTIONS ####
 
-$BoostrapPackageFlag = "-bootstrapPackage"
-$ScriptUri = $Boxstarter['ScriptToCall']
-Write-Host "BoxstarterScriptToCall $(Boxstarter['ScriptToCall'])"
-$BoostrapPackageFlagPosition = $ScriptUri.IndexOf($BoostrapPackageFlag)
-Write-Host "BoostrapPackageFlagPosition $BoostrapPackageFlagPosition"
-$BoostrapPackagePath = $BaseUri.Substring($BoostrapPackageFlagPosition + $BoostrapPackageFlag.Length)
-Write-Host "BoostrapPackagePath $BoostrapPackagePath"
-$BoostrapPackagePath = $BoostrapPackagePath.TrimStart("'", " ")
-Write-Host "BoostrapPackagePath $BoostrapPackagePath"
-$BoostrapPackagePath = $BoostrapPackagePath.TrimEnd("'", " ")
-Write-Host "BoostrapPackagePath $BoostrapPackagePath"
-$BoostrapPackageFolder = $BoostrapPackagePath.Substring(0, $BoostrapPackagePath.LastIndexOf("/"))
-Write-Host "BoostrapPackageFolder $BoostrapPackageFolder"
-
-function Download-FromRelativePath {
-    Param ([string]$RelativePath, [string]$Destination)
-	(new-object net.webclient).DownloadFile("$BoostrapPackageFolder/$RelativePath", $Destination)
-}
-
 function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
@@ -118,7 +99,7 @@ foreach ($Obj in $ComObjItem) {
 }
 
 $WallpaperImagePath = "$([Environment]::GetFolderPath("MyDocuments"))/wallpaper.jpg"
-Download-FromRelativePath -RelativePath "cj-dayrit-eMBdLhYY468-unsplash.jpg" -Destination $WallpaperImagePath
+(new-object net.webclient).DownloadFile("https://unsplash.com/photos/eMBdLhYY468/download?force=true", $WallpaperImagePath)
 Set-ItemProperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $WallpaperImagePath
 Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0"
 $SpanWallpaper = "22";
