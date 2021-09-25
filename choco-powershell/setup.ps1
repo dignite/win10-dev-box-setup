@@ -180,6 +180,7 @@ code --install-extension schmas.jump-to-tests
 code --install-extension sandcastle.vscode-open
 Write-Host "Installed VS Code Extensions" -Foreground green
 
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Name z -RequiredVersion 1.1.10 -AllowClobber
 Install-Module psreadline -Force
 
