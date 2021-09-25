@@ -1,16 +1,19 @@
 # Win10 dev box setup
 
-This is the repo storing scripts that used to setup my dev machine. Currently using Boxstarter+Choco+PowerShell combination.
+This is the repo storing scripts that used to setup my dev machine.
 
 # Getting started
 
-Navigate to [Boxstarter+Choco+PowerShell solution.](/choco-powershell) for the instructions to run setup.
+Running the boxstarter script requires admin access.
+
+[One click Web URL to install using Boxstarter (Use Microsoft Edge)](http://boxstarter.org/package/url?https://raw.githubusercontent.com/dignite/win10-dev-box-setup/master/SetupDeveloperMachine.ps1)
 
 # Built With
 
 - Boxstarter
 - Chocolatey
 - PowerShell
+- Scoop
 
 # Contributing
 
