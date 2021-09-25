@@ -54,8 +54,6 @@ refreshenv
 
 ######## -> ENVIRONMENT CONFIGURATION ########
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-
 Enable-ComputerRestore -Drive "C:\"
 vssadmin list shadowstorage
 vssadmin resize shadowstorage /on=C: /for=C: /maxsize=10%
