@@ -88,13 +88,14 @@ function ConfigureEnvironment {
     }
 
     $WallpaperImagePath = "$([Environment]::GetFolderPath("MyDocuments"))/wallpaper.jpg"
-    (new-object net.webclient).DownloadFile("https://unsplash.com/photos/eMBdLhYY468/download?force=true", $WallpaperImagePath)
-    Set-ItemProperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $WallpaperImagePath
-    Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0"
-    $SpanWallpaper = "22";
-    Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallpaperStyle -value $SpanWallpaper -Force
-    RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
-
+    if(!((Get-ItemProperty -path "HKCU:Control Panel\Desktop" -name WallPaper).WallPaper -Like $WallpaperImagePath)) {
+        (new-object net.webclient).DownloadFile("https://unsplash.com/photos/eMBdLhYY468/download?force=true", $WallpaperImagePath)
+        Set-ItemProperty -path "HKCU:Control Panel\Desktop" -name WallPaper -value $WallpaperImagePath
+        Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name TileWallpaper -value "0"
+        $SpanWallpaper = "22";
+        Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallpaperStyle -value $SpanWallpaper -Force
+        Invoke-Reboot
+    }
 }
 
 function InstallWindowsSubsystemForLinux {
