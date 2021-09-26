@@ -210,28 +210,32 @@ function AddBoxstarterDoneRestorePoint {
 
 function OpenManualInstructions {
     $ManualInstructionsFilePath = "$([Environment]::GetFolderPath("Desktop"))/ManualSteps.txt";
-    "Please configure personal information.
-        git config --global user.email ""<email>""
-        git config --global user.name ""<name>""
+    if (!(Test-Path $ManualInstructionsFilePath)) {
+        "Manual steps
+        
+Please configure personal information.
+    git config --global user.email ""<email>""
+    git config --global user.name ""<name>""
 
-    Manual installs
-        MicSwitch https://github.com/iXab3r/MicSwitch/releases
-        LogiCapture https://www.logitech.com/en-us/product/capture
-        choco install clipx -y
+Manual installs
+    MicSwitch https://github.com/iXab3r/MicSwitch/releases
+    LogiCapture https://www.logitech.com/en-us/product/capture
+    choco install clipx -y
 
-    Configure ClipX
-        1. Right click tray icon and open settings
-        2. Check ""Run ClipX on Startup""
-        3. Remember the last 256 entries
-        4. Delete hotkeys ""Navigate"" and ""Google Search""
+Configure ClipX
+    1. Right click tray icon and open settings
+    2. Check ""Run ClipX on Startup""
+    3. Remember the last 256 entries
+    4. Delete hotkeys ""Navigate"" and ""Google Search""
 
-    Configure VSCode
-    1. Turn on Settings Sync (Ctrl+P ""Turn On"")
-    2. Log in with Github
-    3. ""Replace Local""
-    
-    Add saved Powershell_profile.ps1
-    Add saved Windows Terminal settings.json" | Add-Content $ManualInstructionsFilePath -Encoding UTF8
+Configure VSCode
+1. Turn on Settings Sync (Ctrl+P ""Turn On"")
+2. Log in with Github
+3. ""Replace Local""
+
+Add saved Powershell_profile.ps1
+Add saved Windows Terminal settings.json" | Add-Content $ManualInstructionsFilePath -Encoding UTF8
+    }
     notepad.exe $ManualInstructionsFilePath
 }
 
@@ -256,5 +260,5 @@ function Add-ToPowerShellProfile($Find, $Content) {
 #### <- HELPER FUNCTIONS ####
 
 if($RunScript) {
-Run
+    Run
 }
