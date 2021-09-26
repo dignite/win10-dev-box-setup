@@ -6,6 +6,10 @@ This is the repo storing scripts that used to setup my dev machine.
 
 Running the boxstarter script requires admin access.
 
+First, run `GatherUserInput.ps1` in PowerShell
+
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/dignite/win10-dev-box-setup/master/GatherUserInput.ps1')
+
 [One click Web URL to install using Boxstarter (Use Microsoft Edge)](http://boxstarter.org/package/url?https://raw.githubusercontent.com/dignite/win10-dev-box-setup/master/SetupDeveloperMachine.ps1)
 
 # Built With
