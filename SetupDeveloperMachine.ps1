@@ -9,6 +9,7 @@ function Run {
     CleanUp
     RunWindowsUpdate
     AddBoxstarterDoneRestorePoint
+    SetGitUser
     OpenManualInstructions
 }
 
@@ -208,14 +209,21 @@ function AddBoxstarterDoneRestorePoint {
     }
 }
 
+function SetGitUser {
+    $GitUserName = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GIT_USER_NAME", "User")
+    $GitEmail = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GIT_EMAIL", "User")
+
+    if($GitUserName -and $GitEmail) {
+        git config --global user.email "$GitUserName"
+        git config --global user.name "$GitEmail"
+    }
+}
+
 function OpenManualInstructions {
     $ManualInstructionsFilePath = "$([Environment]::GetFolderPath("Desktop"))/ManualSteps.txt";
+
     if (!(Test-Path $ManualInstructionsFilePath)) {
         "Manual steps
-        
-Please configure personal information.
-    git config --global user.email ""<email>""
-    git config --global user.name ""<name>""
 
 Manual installs
     MicSwitch https://github.com/iXab3r/MicSwitch/releases
