@@ -15,6 +15,15 @@ Running the boxstarter script requires admin access.
 - PowerShell
 - Scoop
 
+# Developing
+
+Testing the script is a bit cumbersome right now, what you can do is source the script without running it and invoke the individual functions.
+
+As an example you can test "Open manual instructions" with
+
+    . .\SetupDeveloperMachine.ps1 -RunScript $False
+    OpenManualInstructions
+
 # Contributing
 
 This repo is for Win 10 dev box and mainly for a full stack developer. These scripts may not suit to your development environment setup requirements. But can be used as starting point to fork and customize.

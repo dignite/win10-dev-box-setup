@@ -1,3 +1,5 @@
+param ($RunScript=$True)
+
 function Run {
     InstallPrerequisites
     ConfigureEnvironment
@@ -253,4 +255,6 @@ function Add-ToPowerShellProfile($Find, $Content) {
 
 #### <- HELPER FUNCTIONS ####
 
+if($RunScript) {
 Run
+}
