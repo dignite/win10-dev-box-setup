@@ -10,6 +10,7 @@ function Run {
     RunWindowsUpdate
     AddBoxstarterDoneRestorePoint
     SetGitUser
+    InstallAndConfigureWireguard
     OpenManualInstructions
 }
 
@@ -216,6 +217,16 @@ function SetGitUser {
     if($GitUserName -and $GitEmail) {
         git config --global user.email "$GitUserName"
         git config --global user.name "$GitEmail"
+    }
+}
+
+function InstallAndConfigureWireguard {
+    $WireGuardConfigPath = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_WIREGUARD_CONFIG_PATH", "User")
+
+    if($WireGuardConfigPath -and (Test-Path $WireGuardConfigPath)) {
+        choco install wireguard -y
+        refreshenv
+        wireguard /installtunnelservice "$WireGuardConfigPath"
     }
 }
 
