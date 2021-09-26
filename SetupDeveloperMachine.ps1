@@ -14,6 +14,8 @@ function Run {
     OpenManualInstructions
 }
 
+$GitCloneTarget = "C:\dev"
+
 function InstallPrerequisites {
     if (Check-Command -cmdname 'choco') {
         Write-Host "Choco is already installed, skip installation."
@@ -185,8 +187,9 @@ function ConfigureDevelopmentTools {
     git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     git config --global alias.mr "push -u -o merge_request.create -o merge_request.remove_source_branch"
 
-
-    mkdir C:\dev
+    if (!(Test-Path $GitCloneTarget)) {
+        mkdir $GitCloneTarget
+    }
 }
 
 function CleanUp {
@@ -227,6 +230,41 @@ function InstallAndConfigureWireguard {
         choco install wireguard -y
         refreshenv
         wireguard /installtunnelservice "$WireGuardConfigPath"
+    }
+}
+
+function CloneAllGitlabRepositories {
+    $GitlabBaseUrl = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_BASE_URL", "User")
+    $GitlabToken = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_TOKEN", "User")
+    $GitlabGroupId = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_GROUP_ID", "User")
+    if ($GitlabBaseUrl -and $GitlabToken) {
+        if (!(Test-Path $GitCloneTarget)) {
+            mkdir $GitCloneTarget
+        }
+        Push-Location $GitCloneTarget
+        try {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            $Page = 0
+            do {
+                $Page = $Page + 1
+                $Url="$GitlabBaseUrl/api/v4/groups/$GitlabGroupId/projects?page=$($Page)&per_page=100&include_subgroups=true&private_token=$GitlabToken"
+                $Request = Invoke-WebRequest $Url | ConvertFrom-Json
+                $ProjectCount = $Request.Count
+                Write-Host "Page $Page Count $ProjectCount"
+                foreach ($Project in $Request) {
+                    if ($Project.archived) {
+                        Write-Host "Skip $($Project.name_with_namespace), archived"
+                    } elseif(Test-Path "$GitCloneTarget/$($Project.path)") {
+                        Write-Host "Skip $($Project.name_with_namespace), already cloned"
+                    } else {
+                        Write-Host "git clone $($Project.ssh_url_to_repo)"
+                        git clone $($Project.ssh_url_to_repo)
+                    }
+                }
+            } while ($ProjectCount -gt 0)
+        } finally {
+            Pop-Location
+        }
     }
 }
 
