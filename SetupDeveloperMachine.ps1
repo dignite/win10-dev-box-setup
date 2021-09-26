@@ -137,7 +137,6 @@ function InstallPrograms {
     Write-Host "Installed programs" -Foreground green
 }
 
-
 function ConfigureDevelopmentTools {
     Write-Host "Installing VS Code extensions"
     code --install-extension dbaeumer.vscode-eslint
