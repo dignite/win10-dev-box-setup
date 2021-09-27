@@ -219,8 +219,8 @@ function SetGitUser {
     $GitEmail = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GIT_EMAIL", "User")
 
     if($GitUserName -and $GitEmail) {
-        git config --global user.email "$GitUserName"
-        git config --global user.name "$GitEmail"
+        git config --global user.name "$GitUserName"
+        git config --global user.email "$GitEmail"
     }
 }
 
