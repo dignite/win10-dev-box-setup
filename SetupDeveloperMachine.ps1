@@ -11,6 +11,7 @@ function Run {
     AddBoxstarterDoneRestorePoint
     SetGitUser
     InstallAndConfigureWireguard
+    CloneAllGitlabRepositories
     OpenManualInstructions
 }
 
