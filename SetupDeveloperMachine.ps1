@@ -16,6 +16,7 @@ function Run {
 }
 
 $GitCloneTarget = "C:\dev"
+$ChocolateyCacheFolder = "C:\choco-temp"
 
 function InstallPrerequisites {
     if (Check-Command -cmdname 'choco') {
@@ -50,6 +51,11 @@ function InstallPrerequisites {
 }
 
 function ConfigureEnvironment {
+    if (!(Test-Path $ChocolateyCacheFolder)) {
+        mkdir $ChocolateyCacheFolder
+    }
+    choco config set cacheLocation "$ChocolateyCacheFolder"
+
     Enable-ComputerRestore -Drive "C:\"
     vssadmin list shadowstorage
     vssadmin resize shadowstorage /on=C: /for=C: /maxsize=10%
