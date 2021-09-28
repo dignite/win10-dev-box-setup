@@ -9,7 +9,7 @@ function Run {
     }
     Read-HostAndSaveToEnv -Description "Gitlab base url (eg. http://gitlab.example.com)" -EnvironmentKey WIN10_DEV_BOX_GITLAB_BASE_URL
     Read-HostAndSaveToEnv -Description "Gitlab api token with 'api' access (eg. qyfymyD3syW_KqVPXhMH)" -EnvironmentKey WIN10_DEV_BOX_GITLAB_TOKEN
-    #Read-HostAndSaveToEnv -Description "Gitlab group to clone (eg. 12)" -EnvironmentKey WIN10_DEV_BOX_GITLAB_GROUP_ID
+    Read-HostAndSaveToEnv -Description "Gitlab group to clone (eg. 12)" -EnvironmentKey WIN10_DEV_BOX_GITLAB_GROUP_ID
     Write-Host "Done! Do you want to launch a One Click install of SetupDeveloperMachine.ps1 i Microsoft Edge? [y/N]" -ForegroundColor green
     Write-Host "> " -NoNewline
     $LaunchOneClickInstall = Read-Host

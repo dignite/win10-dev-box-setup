@@ -12,7 +12,7 @@ function Run {
     SetGitUser
     InstallAndConfigureWireguard
     ConfigureGitlabSSH
-    #CloneAllGitlabRepositories
+    CloneAllGitlabRepositories
     OpenManualInstructions
 }
 
