@@ -202,7 +202,7 @@ function ConfigureDevelopmentTools {
 function CleanUp {
     Write-Host "Cleaning desktop"
     Remove-Item C:\Users\*\Desktop\*lnk
-    Remove-Item C:\Users\*\Desktop\desktop.ini
+    Remove-Item C:\Users\*\Desktop\desktop.ini -Force
     Write-Host "Desktop cleaned"
 }
 
