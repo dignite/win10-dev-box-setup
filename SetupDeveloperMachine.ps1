@@ -56,6 +56,8 @@ function ConfigureEnvironment {
     }
     choco config set cacheLocation "$ChocolateyCacheFolder"
 
+    Update-ExecutionPolicy Unrestricted
+
     Enable-ComputerRestore -Drive "C:\"
     vssadmin list shadowstorage
     vssadmin resize shadowstorage /on=C: /for=C: /maxsize=10%
