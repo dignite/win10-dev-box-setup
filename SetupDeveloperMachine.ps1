@@ -10,7 +10,7 @@ function Run {
     RunWindowsUpdate
     AddBoxstarterDoneRestorePoint
     SetGitUser
-    #InstallAndConfigureWireguard
+    InstallAndConfigureWireguard
     #CloneAllGitlabRepositories
     OpenManualInstructions
 }
