@@ -11,6 +11,7 @@ function Run {
     AddBoxstarterDoneRestorePoint
     SetGitUser
     InstallAndConfigureWireguard
+    ConfigureGitlabSSH
     #CloneAllGitlabRepositories
     OpenManualInstructions
 }
@@ -280,6 +281,32 @@ function InstallAndConfigureWireguard {
         if(!((wg show) -like "*interface: *")) {
             wireguard /installtunnelservice "$WireGuardConfigPath"
             Invoke-Reboot
+        }
+    }
+}
+
+function ConfigureGitlabSSH {
+    $GitlabBaseUrl = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_BASE_URL", "User")
+    $GitlabToken = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_TOKEN", "User")
+    if ($GitlabBaseUrl -and $GitlabToken) {
+        $KeyLocation =  "$env:USERPROFILE/.ssh/gitlab"
+        Write-Host "Creating Gitlab SSH key.."
+        if (!(Test-Path $KeyLocation)) {
+            ssh-keygen -t ed25519 -f $KeyLocation -q -N """"
+            Write-Host "..gitlab SSH key created"
+        } else {
+            Write-Host "..gitlab SSH key already created"
+        }
+
+        Write-Host "Uploading Gitlab SSH key.."
+        $PublicKey = Get-Content "$($KeyLocation).pub"
+        $CurrentKeys = Invoke-WebRequest "$GitlabBaseUrl/api/v4/user/keys?&private_token=$GitlabToken" | ConvertFrom-Json
+        if(($CurrentKeys | Where-Object {$_.key.Split(" ")[1] -eq $PublicKey.Split(" ")[1]}).Count -gt 0) {
+            Write-Host "..key already uploaded"
+        } else {
+            $PostParams = @{title='Boxstarter';key=$PublicKey}
+            Invoke-WebRequest -Uri "$GitlabBaseUrl/api/v4/user/keys?private_token=$GitlabToken" -Method POST -Body $PostParams
+            Write-Host "..key uploaded"
         }
     }
 }
