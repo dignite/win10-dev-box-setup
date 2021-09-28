@@ -277,7 +277,10 @@ function InstallAndConfigureWireguard {
     if($WireGuardConfigPath -and (Test-Path $WireGuardConfigPath)) {
         choco install wireguard -y
         refreshenv
-        wireguard /installtunnelservice "$WireGuardConfigPath"
+        if(!((wg show) -like "*interface: *")) {
+            wireguard /installtunnelservice "$WireGuardConfigPath"
+            Invoke-Reboot
+        }
     }
 }
 
