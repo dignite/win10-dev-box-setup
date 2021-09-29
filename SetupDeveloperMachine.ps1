@@ -301,7 +301,7 @@ function ConfigureGitlabSSH {
         Write-Host "Uploading Gitlab SSH key.."
         $PublicKey = Get-Content "$($KeyLocation).pub"
         $CurrentKeys = Invoke-WebRequest "$GitlabBaseUrl/api/v4/user/keys?&private_token=$GitlabToken" | ConvertFrom-Json
-        if(($CurrentKeys | Where-Object {$_.key.Split(" ")[1] -eq $PublicKey.Split(" ")[1]}).Count -gt 0) {
+        if($CurrentKeys | Where-Object {$_.key.Split(" ")[1] -eq $PublicKey.Split(" ")[1]}) {
             Write-Host "..key already uploaded"
         } else {
             $PostParams = @{title='Boxstarter';key=$PublicKey}
