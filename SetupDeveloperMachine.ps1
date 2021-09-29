@@ -292,7 +292,7 @@ function ConfigureGitlabSSH {
         $KeyLocation =  "$env:USERPROFILE/.ssh/id_ed25519"
         Write-Host "Creating Gitlab SSH key.."
         if (!(Test-Path $KeyLocation)) {
-            ssh-keygen -t ed25519 -f $KeyLocation -q -N """"
+            ssh-keygen -t ed25519 -f $KeyLocation -q -C $env:computername -N """"
             Write-Host "..gitlab SSH key created"
         } else {
             Write-Host "..gitlab SSH key already created"
@@ -304,7 +304,7 @@ function ConfigureGitlabSSH {
         if($CurrentKeys | Where-Object {$_.key.Split(" ")[1] -eq $PublicKey.Split(" ")[1]}) {
             Write-Host "..key already uploaded"
         } else {
-            $PostParams = @{title='Boxstarter';key=$PublicKey}
+            $PostParams = @{title="Boxstarter $env:computername";key=$PublicKey}
             Invoke-WebRequest -Uri "$GitlabBaseUrl/api/v4/user/keys?private_token=$GitlabToken" -Method POST -Body $PostParams
             Write-Host "..key uploaded"
         }
