@@ -289,7 +289,7 @@ function ConfigureGitlabSSH {
     $GitlabBaseUrl = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_BASE_URL", "User")
     $GitlabToken = [Environment]::GetEnvironmentVariable("WIN10_DEV_BOX_GITLAB_TOKEN", "User")
     if ($GitlabBaseUrl -and $GitlabToken) {
-        $KeyLocation =  "$env:USERPROFILE/.ssh/gitlab"
+        $KeyLocation =  "$env:USERPROFILE/.ssh/id_ed25519"
         Write-Host "Creating Gitlab SSH key.."
         if (!(Test-Path $KeyLocation)) {
             ssh-keygen -t ed25519 -f $KeyLocation -q -N """"
