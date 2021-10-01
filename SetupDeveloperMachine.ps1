@@ -219,11 +219,11 @@ function ConfigureDevelopmentTools {
 
     git config --global push.default current
     git config --global core.editor "code --wait"
-    git config --global diff.tool vscode
-    git config --global difftool.vscode.cmd 'code --wait $MERGED'
     git config --global merge.tool vscode
-    git config --global mergetool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
+    git config --global mergetool.vscode.cmd 'code --wait $MERGED''
     git config --global mergetool.keepBackup false
+    git config --global diff.tool vscode
+    git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE
     git config --global alias.co "checkout"
     git config --global alias.oops "commit --amend --no-edit"
     git config --global alias.a "add --patch"
